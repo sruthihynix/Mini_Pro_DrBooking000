@@ -28,7 +28,8 @@ def register(request):
             # Create and save the dr_book ob
             patient = Patient(p_name=name, p_age=age, p_contact=contact, p_uname=uname, p_pwd=pwd1)
             patient.save()
-        return HttpResponse("User registured sucesssfully")
+        # return HttpResponse("User registured sucesssfully")
+        return redirect('booking')
     # return redirect('login')
     return render(request, 'login.html')
 
@@ -47,6 +48,19 @@ def loginpage(request):
             return HttpResponse("invalid username")
     return render(request, 'login.html')
 
+def drLogin(request):
+    if request.method == 'POST':
+        uname = request.POST.get('uname')
+        pwd = request.POST.get('pwd')
+        print(uname)
+        check_dr = Doctor.objects.filter(d_uname=uname, d_pwd=pwd)
+        print(check_dr)
+        if check_dr:
+            request.session['d_username'] = uname  # session
+            return redirect('appointments')  # here go to booking page
+        else:
+            return HttpResponse("invalid username")
+    return render(request, 'login.html')
 
 def bookingPage(request):
     if request.method == 'POST':

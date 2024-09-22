@@ -10,7 +10,10 @@ urlpatterns = [
 
     path('register/', views.register, name='register'),  # Add this line for the register view
 
-    path('login/', views.loginpage, name='login'),
+    path('login/', views.loginpage, name='login'), # patient login page
+
+    path('drlogin/',views.drLogin, name='drlogin'),
+
     path('booking/', views.bookingPage, name='booking'),
     path('appointments/', views.appo_list, name='appointments'),  # New URL for appointments
 ]
