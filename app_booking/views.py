@@ -38,7 +38,7 @@ def loginpage(request):
     if request.method=='POST':
         uname=request.POST.get('uname')
         pwd=request.POST.get('pwd')
-        print(uname)
+        # print(uname)
         check_patient=Patient.objects.filter(p_uname=uname,p_pwd=pwd)
         print(check_patient)
         if check_patient:
@@ -52,12 +52,12 @@ def drLogin(request):
     if request.method == 'POST':
         uname = request.POST.get('uname')
         pwd = request.POST.get('pwd')
-        print(uname)
+        # print(uname)
         check_dr = Doctor.objects.filter(d_uname=uname, d_pwd=pwd)
         print(check_dr)
         if check_dr:
             request.session['d_username'] = uname  # session
-            return redirect('appointments')  # here go to booking page
+            return redirect('appointments')  # here go to Appointment page
         else:
             return HttpResponse("invalid username")
     return render(request, 'login.html')
@@ -95,7 +95,7 @@ def bookingPage(request):
     return render(request, 'booking.html')
 
 
-# doctor can view patient appointment list when dr  login
+# doctor can view patient appointment list when dr. login
 def appo_list(request):
     # Retrieve all booking entries
     appointments = booking.objects.all()
